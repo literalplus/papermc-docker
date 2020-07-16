@@ -15,7 +15,8 @@ RUN apk add bash && \
 RUN wget \
         https://github.com/itzg/rcon-cli/releases/download/1.4.8/rcon-cli_1.4.8_linux_amd64.tar.gz \
         -O /tmp/rcon-cli.tar.gz && \
-        mv /tmp/rcon-cli.tar.gz /usr/local/bin/rcon-cli
+        mv /tmp/rcon-cli.tar.gz /usr/local/bin/rcon-cli && \
+        chmod +x /usr/local/bin/rcon-cli
 
 RUN wget \
     https://papermc.io/api/v1/paper/${MC_VERSION}/${PAPER_BUILD}/download \
