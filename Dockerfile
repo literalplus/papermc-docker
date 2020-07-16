@@ -1,6 +1,6 @@
 FROM openjdk:14-jdk-alpine
 
-COPY eula.txt /papermc/data/eula.txt
+COPY eula.txt /opt/paper/eula.txt
 
 ARG MC_VERSION="1.16.1"
 ARG PAPER_BUILD="latest"
