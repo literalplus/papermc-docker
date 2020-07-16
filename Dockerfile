@@ -1,21 +1,39 @@
-# JRE base
-FROM openjdk:11.0-jre-slim
+FROM openjdk:14-jdk-alpine
 
-# Environment variables
-ENV MC_VERSION="1.16.1" \
-    PAPER_BUILD="latest" \
-    MC_RAM="1G" \
+COPY eula.txt /papermc/data/eula.txt
+
+ARG MC_VERSION="1.16.1"
+ARG PAPER_BUILD="latest"
+
+ENV RCON_PW="pls change me thank" \
     JAVA_OPTS=""
 
-ADD papermc.sh .
-RUN apt-get update \
-    && apt-get install -y wget \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add bash && \
+    mkdir -p /opt/paper && \
+    adduser -h /opt/paper -s /bin/bash -D -u 1001 minecraft
 
-# Start script
-CMD ["sh", "./papermc.sh"]
+RUN wget \
+        https://github.com/itzg/rcon-cli/releases/download/1.4.8/rcon-cli_1.4.8_linux_amd64.tar.gz \
+        -O /tmp/rcon-cli.tar.gz && \
+        mv /tmp/rcon-cli.tar.gz /usr/local/bin/rcon-cli
 
-# Container setup
+RUN wget \
+    https://papermc.io/api/v1/paper/${MC_VERSION}/${PAPER_BUILD}/download \
+    -O /opt/paper/paper-wrapper.jar && \
+    chown -R minecraft:minecraft /opt/paper
+
+WORKDIR /data/papermc
+USER minecraft
+
+CMD [ \
+    "java", \
+    "-server", \
+    "-XX:MaxRAMPercentage=75", \
+    "-jar", \
+    "/opt/paper/paper-wrapper.jar" \
+]
+
 EXPOSE 25565/tcp
 EXPOSE 25565/udp
-VOLUME /papermc
+VOLUME /data/papermc
+VOLUME /data/worlds

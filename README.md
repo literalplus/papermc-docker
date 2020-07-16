@@ -1,6 +1,22 @@
 # PaperMC Docker
 This is a Linux Docker image for the PaperMC Minecraft server.
 
+This fork is optimised for usage in Kubernetes. It requires the following
+setup to be done by Kubernetes (perferably a stateful set):
+ * A persistent volume mounted at /data/worlds/
+ * server.properties needs to have:
+   * `level-name=/data/worlds/this-last-part-is-arbitrary` (world storage location)
+   * `enable-rcon=true` (so you can issue console commands)
+   * `rcon.password=XXX` (must match the RCON_PW environment variable)
+
+```bash
+docker build \
+  --build-arg MC_VERSION=1.16.1 \
+  --build-arg PAPER_BUILD=92 \
+  -t images.lit.plus/papermc:1.16.1-92 \
+  .
+```
+
 PaperMC is an optimized Minecraft server with plugin support (Bukkit, Spigot, Sponge, etc.).
 This image provides a basic PaperMC server. All customizations are left to the user.
 # Usage
