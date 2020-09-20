@@ -2,7 +2,7 @@ FROM openjdk:14-jdk-alpine
 
 COPY eula.txt /opt/paper/eula.txt
 
-ARG MC_VERSION="1.16.1"
+ARG MC_VERSION="1.16.3"
 ARG PAPER_BUILD="latest"
 
 ENV RCON_PW="pls change me thank" \
@@ -15,7 +15,8 @@ RUN apk add bash && \
 RUN wget \
         https://github.com/itzg/rcon-cli/releases/download/1.4.8/rcon-cli_1.4.8_linux_amd64.tar.gz \
         -O /tmp/rcon-cli.tar.gz && \
-        mv /tmp/rcon-cli.tar.gz /usr/local/bin/rcon-cli && \
+        tar -xz -C /tmp -f /tmp/rcon-cli.tar.gz rcon-cli && \
+        mv /tmp/rcon-cli /usr/local/bin/rcon-cli && \
         chmod +x /usr/local/bin/rcon-cli
 
 RUN wget \
