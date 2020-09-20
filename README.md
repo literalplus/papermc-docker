@@ -13,11 +13,14 @@ setup to be done by Kubernetes (perferably a stateful set):
 Docker build:
 
 ```bash
+export MC_VERSION=1.16.3
+export PAPER_BUILD=202
 docker build \
-  --build-arg MC_VERSION=1.16.3 \
-  --build-arg PAPER_BUILD=202 \
-  -t images.lit.plus/papermc:1.16.3-92 \
+  --build-arg MC_VERSION=${MC_VERSION} \
+  --build-arg PAPER_BUILD=${PAPER_BUILD} \
+  -t images.lit.plus/papermc:${MC_VERSION}-${PAPER_BUILD} \
   .
+docker push images.lit.plus/papermc:${MC_VERSION}-${PAPER_BUILD}
 ```
 
 PaperMC is an optimized Minecraft server with plugin support (Bukkit, Spigot, Sponge, etc.).
