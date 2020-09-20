@@ -4,6 +4,7 @@ COPY eula.txt /opt/paper/eula.txt
 
 ARG MC_VERSION="1.16.3"
 ARG PAPER_BUILD="latest"
+ARG RCON_CLI_VERSION="1.4.8"
 
 ENV RCON_PW="pls change me thank" \
     JAVA_OPTS=""
@@ -13,7 +14,7 @@ RUN apk add bash && \
     adduser -h /opt/paper -s /bin/bash -D -u 1001 minecraft
 
 RUN wget \
-        https://github.com/itzg/rcon-cli/releases/download/1.4.8/rcon-cli_1.4.8_linux_amd64.tar.gz \
+        https://github.com/itzg/rcon-cli/releases/download/${RCON_CLI_VERSION}/rcon-cli_${RCON_CLI_VERSION}_linux_amd64.tar.gz \
         -O /tmp/rcon-cli.tar.gz && \
         tar -xz -C /tmp -f /tmp/rcon-cli.tar.gz rcon-cli && \
         mv /tmp/rcon-cli /usr/local/bin/rcon-cli && \

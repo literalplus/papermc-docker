@@ -10,6 +10,10 @@ setup to be done by Kubernetes (perferably a stateful set):
    * `enable-rcon=true` (so you can issue console commands)
    * `rcon.password=XXX` (must match the RCON_PW environment variable)
 
+This fork ships with the [rcon-cli](https://github.com/itzg/rcon-cli)
+binary (Apache License), which means you can just open a shell in the pod
+and run `rcon-cli` for a Minecraft server console.
+
 Docker build:
 
 ```bash
