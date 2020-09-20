@@ -1,10 +1,10 @@
 # PaperMC Docker
-This is a Linux Docker image for the PaperMC Minecraft server, modified
-to work with a Kubernetes setup.
+This is a Linux Docker image for the PaperMC Minecraft server.
 
 This fork is optimised for usage in Kubernetes. It requires the following
 setup to be done by Kubernetes (perferably a stateful set):
- * A persistent volume mounted at /data/worlds/
+ * A persistent volume mounted at /data/worlds/ (world data)
+ * A persistent volume mounted at /data/papermc/ (server root directory)
  * server.properties (ConfigMap) needs to have:
    * `level-name=/data/worlds/this-last-part-is-arbitrary` (world storage location)
    * `enable-rcon=true` (so you can issue console commands)
@@ -32,7 +32,9 @@ This project *does **NOT** redistribute the Minecraft server files*. Instead, th
 the image, `papermc.sh`, downloads these files from their official sources during installation.
 
 **Note:** This is supposed to be either build locally and used only there or
-be pushed to a private Docker registry. Uploading the binary image to a
-public repository would be a copyright violation.
+be pushed to a private Docker registry. Specifically, it is important that
+the image automatically indicates agreement with the Minecraft EULA via
+the eula.txt. Hence, the Docker build must only be run if you actually
+agree to the terms of the Minecraft EULA.
 
 **PLEASE NOTE:** This is an unofficial project. I did not create PaperMC. [This is the official PaperMC website.](https://papermc.io/)
