@@ -1,8 +1,8 @@
-FROM openjdk:14-jdk-alpine
+FROM openjdk:16-jdk-alpine
 
 COPY eula.txt /opt/paper/eula.txt
 
-ARG MC_VERSION="1.16.3"
+ARG MC_VERSION="1.16.5"
 ARG PAPER_BUILD="latest"
 ARG RCON_CLI_VERSION="1.4.8"
 
