@@ -17,8 +17,8 @@ and run `rcon-cli` for a Minecraft server console.
 Docker build:
 
 ```bash
-export MC_VERSION=1.16.5
-export PAPER_BUILD=742
+export MC_VERSION=1.19.3
+export PAPER_BUILD=386
 docker build \
   --build-arg MC_VERSION=${MC_VERSION} \
   --build-arg PAPER_BUILD=${PAPER_BUILD} \
