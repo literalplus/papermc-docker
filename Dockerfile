@@ -1,4 +1,4 @@
-FROM openjdk:16-jdk-alpine
+FROM openjdk:17-jdk-alpine
 
 COPY eula.txt /opt/paper/eula.txt
 
@@ -21,7 +21,7 @@ RUN wget \
         chmod +x /usr/local/bin/rcon-cli
 
 RUN wget \
-    https://papermc.io/api/v1/paper/${MC_VERSION}/${PAPER_BUILD}/download \
+    https://api.papermc.io/v2/projects/paper/versions/${MC_VERSION}/builds/${PAPER_BUILD}/downloads/paper-${MC_VERSION}-${PAPER_BUILD}.jar \
     -O /opt/paper/paper-wrapper.jar && \
     chown -R minecraft:minecraft /opt/paper
 
