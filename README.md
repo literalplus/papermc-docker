@@ -5,6 +5,8 @@ This fork is optimised for usage in Kubernetes. It requires the following
 setup to be done by Kubernetes (perferably a stateful set):
  * A persistent volume mounted at /data/worlds/ (world data)
  * A persistent volume mounted at /data/papermc/ (server root directory)
+ * A secret mounted to `/opt/paper/.rcon-cli.yaml` for out-of-the-box RCON console in the container shell (`rcon-cli`)
+ * A config map mounted to /data/papermc/server.properties (if desired to be separate from the PVC) (It is not recommended to do this for Bukkit/Spigot/Paper configs, as they frequently go through migrations and try to write back the changed file to disk, which doesn't work for a mounted config map)
  * server.properties (ConfigMap) needs to have:
    * `level-name=/data/worlds/this-last-part-is-arbitrary` (world storage location)
    * `enable-rcon=true` (so you can issue console commands)
@@ -32,10 +34,9 @@ This image provides a basic PaperMC server. All customizations are left to the u
 # Usage
 It is assumed that the user has already acquired a working Docker installation. If that is not the case, go do that and come back here when you're done.
 # Technical
-This project *does **NOT** redistribute the Minecraft server files*. Instead, the (very small) script that is inside of
-the image, `papermc.sh`, downloads these files from their official sources during installation.
+This project *does **NOT** redistribute the Minecraft server files*. Instead, a script downloads these files from their official sources during installation.
 
-**Note:** This is supposed to be either build locally and used only there or
+**Note:** This is supposed to be either built locally and used only there or
 be pushed to a private Docker registry. Specifically, it is important that
 the image automatically indicates agreement with the Minecraft EULA via
 the eula.txt. Hence, the Docker build must only be run if you actually
