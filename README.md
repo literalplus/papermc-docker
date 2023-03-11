@@ -18,7 +18,7 @@ Docker build:
 
 ```bash
 export MC_VERSION=1.19.3
-export PAPER_BUILD=386
+export PAPER_BUILD=446
 docker build \
   --build-arg MC_VERSION=${MC_VERSION} \
   --build-arg PAPER_BUILD=${PAPER_BUILD} \

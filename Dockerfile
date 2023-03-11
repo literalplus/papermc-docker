@@ -1,7 +1,5 @@
 FROM openjdk:17-jdk-alpine
 
-COPY eula.txt /opt/paper/eula.txt
-
 ARG MC_VERSION="1.19.3"
 ARG PAPER_BUILD="latest"
 ARG RCON_CLI_VERSION="1.4.8"
@@ -25,6 +23,11 @@ RUN wget \
     -O /opt/paper/paper-wrapper.jar && \
     chown -R minecraft:minecraft /opt/paper
 
+RUN mkdir -p /data/papermc && \
+    chown -R minecraft: /data/papermc
+
+COPY eula.txt /data/papermc/eula.txt
+
 WORKDIR /data/papermc
 USER minecraft
 
@@ -37,6 +40,5 @@ CMD [ \
 ]
 
 EXPOSE 25565/tcp
-EXPOSE 25565/udp
-VOLUME /data/papermc
+#VOLUME /data/papermc
 VOLUME /data/worlds
