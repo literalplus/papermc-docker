@@ -19,14 +19,7 @@ and run `rcon-cli` for a Minecraft server console.
 Docker build:
 
 ```bash
-export MC_VERSION=1.19.3
-export PAPER_BUILD=446
-docker build \
-  --build-arg MC_VERSION=${MC_VERSION} \
-  --build-arg PAPER_BUILD=${PAPER_BUILD} \
-  -t images.lit.plus/papermc:${MC_VERSION}-${PAPER_BUILD} \
-  .
-docker push images.lit.plus/papermc:${MC_VERSION}-${PAPER_BUILD}
+./push.sh 1.19.3 446
 ```
 
 PaperMC is an optimized Minecraft server with plugin support (Bukkit, Spigot, Sponge, etc.).
