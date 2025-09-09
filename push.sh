@@ -15,7 +15,7 @@ fi
 MC_VERSION=$1
 PAPER_BUILD=$2
 
-IMG="images.lit.plus/papermc:${MC_VERSION}-${PAPER_BUILD}"
+IMG="registry.lit.plus/papermc:${MC_VERSION}-${PAPER_BUILD}"
 
 if podman image exists $IMG; then
   podman image rm $IMG
