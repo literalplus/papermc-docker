@@ -1,4 +1,4 @@
-FROM docker.io/eclipse-temurin:21-jdk-alpine AS runner
+FROM docker.io/eclipse-temurin:27-jdk-alpine AS runner
 
 ENV RCON_PW="pls change me thank" \
     EXTRA_JAVA_OPTS="" \
